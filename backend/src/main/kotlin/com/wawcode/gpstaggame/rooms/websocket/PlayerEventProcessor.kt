@@ -24,7 +24,7 @@ class PlayerEventProcessor(val roomsRepository: RoomsRepository, val objectMappe
                             .doOnSuccess { println(it) }
                             .map { Room(it.name, it.hostId, it.capacity, room.players, it.id) }
                             .flatMap { roomsRepository.save(it) }
-                }.map { value -> webSocketSession.textMessage(value.name) }
+                }.map { value -> webSocketSession.textMessage(objectMapper.writeValueAsString(value.players)) }
         return webSocketSession.send(output)
     }
 }
