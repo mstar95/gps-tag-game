@@ -1,5 +1,8 @@
 package com.wawcode.gpstaggame.rooms.domain
 
+import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
 import java.util.*
 
-data class Room(val id: UUID = UUID.randomUUID(), val hostId: UUID, val name: String, val capacity: Int, val membersCount: Int)
+@Document(collection = "rooms")
+data class Room(val name: String, val hostId: UUID, val capacity: Int, val players: List<Player> = emptyList(), @Id val id: String = UUID.randomUUID().toString())
