@@ -1,24 +1,22 @@
 package com.wawcode.gpstaggame
 
+import com.fasterxml.jackson.databind.DeserializationFeature
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.reactive.HandlerMapping
-import org.springframework.web.reactive.handler.SimpleUrlHandlerMapping
-import org.springframework.web.reactive.socket.WebSocketHandler
-import java.util.HashMap
-
 
 @Configuration
-class CommonConfiguration(val webSocketHandler: WebSocketHandler) {
+class CommonConfiguration {
 
     @Bean
-    fun webSocketHandlerMapping(): HandlerMapping {
-        val map = HashMap<String, WebSocketHandler>()
-        map["/position-update"] = webSocketHandler
-
-        val handlerMapping = SimpleUrlHandlerMapping()
-        handlerMapping.order = 1
-        handlerMapping.urlMap = map
-        return handlerMapping
+    fun objectMapper(): ObjectMapper {
+        val objectMapper = jacksonObjectMapper()
+        objectMapper.configure(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_AS_NULL, true)
+        objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+        objectMapper.registerKotlinModule()
+        return objectMapper
     }
 }
