@@ -31,6 +31,12 @@ class RoomsEndpoint(val roomsRepository: RoomsRepository) {
                 .flatMap { roomsRepository.save(it) }
     }
 
+    @GetMapping("/{id}/players")
+    fun getRoomPlayers(@PathVariable id: String): Mono<List<Player>> {
+        val room: Mono<Room> = roomsRepository.findById(id)
+        return room.map { it.players }
+    }
+
     @PostMapping("/test")
     @ResponseStatus(HttpStatus.CREATED)
     fun loadTestData() =
