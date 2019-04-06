@@ -5,7 +5,7 @@ import gps from "../gps/gps"
 import "./radar.css"
 import Radar from './radar'
 import Player from './Player'
-import {getPlayers} from "../enemy/playerService"
+import {getClient, getPlayers, runClient} from "../enemy/playerService"
 
 const SCALE = -0.5
 const Map = ({holderSize}) => {
@@ -51,22 +51,28 @@ function calculateUserPoint(imgSize, holderSize, userPos) {
 }
 
 function setGpsInterval(setUserPos) {
-    setInterval(() => getGpsPos(setUserPos), 1000)
+    let client = getClient()
+    setInterval(() => getGpsPos(setUserPos, (location) => client.sendLocation(toPLayer(location))), 1000)
 }
 
 let memoize
 
-async function getGpsPos(setUserPos) {
+async function getGpsPos(setUserPos, callback) {
     const location = await gps()
     if (memoize && memoize.height === location.height && memoize.width === location.width) {
         return
     }
     memoize = location
-    console.log(location)
 
-    setUserPos(normalize(location))
+    let normalized = normalize(location)
+    callback(location)
+    setUserPos(normalized)
 }
 
 const normalize = location => (
     {lat: location.lat - 0.0361798, lng: location.lng - 0.0701858}
 )
+
+function toPLayer(location) {
+    return {positionX: location.lat, positionY: location.lng, id: "ba457bf6-a617-4975-89b5-0bac63b110bc", playerId:  "0b63eb02-b66e-45ee-a111-66f1cd511436"}
+}
