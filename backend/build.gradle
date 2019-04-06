@@ -7,14 +7,15 @@ plugins {
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.wawcode'
-version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
+archivesBaseName = 'app'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    compile 'io.github.benas:random-beans:3.7.0'
     implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
