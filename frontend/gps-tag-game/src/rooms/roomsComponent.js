@@ -20,7 +20,7 @@ const RoomsComponent = ({history, match}) => {
     }, []);
 
     return (
-        <Table>
+        <Table >
             <TableHead>
                 <TableRow>
                     <TableCell>Pokój</TableCell>

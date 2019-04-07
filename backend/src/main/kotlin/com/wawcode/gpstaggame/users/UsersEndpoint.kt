@@ -6,7 +6,7 @@ import com.wawcode.gpstaggame.users.dto.UserRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
-//@CrossOrigin("*")
+@CrossOrigin("*")
 @RequestMapping("users")
 class UsersEndpoint(val usersRepository: UsersRepository) {
 

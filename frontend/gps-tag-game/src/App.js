@@ -11,8 +11,8 @@ const App = () =>
             <div>
                 <div className="navbar"><h1>Berek</h1></div>
 
-                <Route exact path="/game/:id/:roomId" component={MapPage}/>
-                <Route path="/lp" component={LP}/>
+                <Route path="/game/:id/:roomId" component={MapPage}/>
+                <Route exact path="/" component={LP}/>
                 <Route path="/rooms/:id" component={RoomsComponent}/>
             </div>
         </Router>

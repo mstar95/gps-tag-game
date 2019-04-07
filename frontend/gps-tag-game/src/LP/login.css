@@ -1,9 +1,13 @@
-body {
+.xd {
     margin: 0;
     padding: 0;
     background: url("../lp.jpg") no-repeat;
     background-size: 1400px;
     font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden
 }
 
 .box {
@@ -62,7 +66,7 @@ body {
     font-size: 0.75rem;
 }
 
-.box input[type="submit"] {
+.guzik {
     border: none;
     outline: none;
     color: #fff;
@@ -70,9 +74,9 @@ body {
     padding: 0.625rem 1.25rem;
     cursor: pointer;
     border-radius: 0.312rem;
-    font-size: 1rem;
+    font-size: 16px;
 }
 
-.box input[type="submit"]:hover {
+.guzik:hover {
     background-color: rgba(43, 245, 68, 0.48);
 }
