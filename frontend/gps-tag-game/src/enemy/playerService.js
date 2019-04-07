@@ -1,10 +1,6 @@
-export const getPlayers = () => Promise.resolve([{positionX: 20.993555, positionY: 52.210667},
-    {positionX: 20.992381, positionY: 52.211590},
-    {positionX: 20.991341, positionY: 52.210973}])
-
 let clientWebSocket
 
-export function getClient() {
+export function getClient(onMessage) {
     if (clientWebSocket) {
         return {sendLocation}
     }
@@ -19,18 +15,14 @@ export function getClient() {
     clientWebSocket.onerror = function (error) {
         console.log("clientWebSocket.onerror", clientWebSocket, error);
     }
-    clientWebSocket.onmessage = function (error) {
-        console.log("clientWebSocket.onmessage", clientWebSocket, error);
-    }
-
-    function events(responseEvent) {
-        document.querySelector(".events").innerHTML += responseEvent + "<br>";
+    clientWebSocket.onmessage = function (data) {
+        console.log("clientWebSocket.onmessage", clientWebSocket, data);
+        onMessage(JSON.parse(data.data))
     }
 
     return {sendLocation}
 }
 
 function sendLocation(player) {
-    console.log(player)
     clientWebSocket.send(JSON.stringify(player))
 }

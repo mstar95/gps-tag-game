@@ -53,3 +53,38 @@ code {
     align-items: center;
     margin: 0 40%;
 }
+
+.under-map {
+    position: absolute;
+    top: 88%;
+    width: 100%;
+    text-align: center;
+}
+
+.run {
+    color: red;
+    animation: fontbulger 2s infinite;
+    font-size: 30px;
+    margin: 0 36%;
+}
+
+@keyframes fontbulger {
+    0%, 100% {
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1);
+    }
+}
+
+.catch {
+    border-radius: 4px;
+    background-color: #f4511e;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    cursor: pointer;
+}

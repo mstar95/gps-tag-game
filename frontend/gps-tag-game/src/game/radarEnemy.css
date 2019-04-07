@@ -1,0 +1,66 @@
+.radarEnemy{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin: 0;
+    padding: 0;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 1;
+}
+
+
+.radarEnemy li:nth-child(5),
+.radarEnemy li:nth-child(6),
+.radarEnemy li:nth-child(7){
+    list-style: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: 1px solid red;
+    background: transparent;
+    border-radius: 50%;
+}
+
+.radarEnemy li:nth-child(8){
+    list-style: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    transform-origin: top left;
+    background: linear-gradient(45deg, darkred 0%, transparent 50%);
+    animation: animate 2s linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes glow{
+    0%{
+        opacity: 0;
+    }
+    25%{
+        opacity: 0.5;
+    }
+    50%{
+        opacity: 1;
+    }
+    75%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 0;
+    }
+}
