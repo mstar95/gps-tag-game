@@ -3,13 +3,12 @@ import MapBorders from "./MapBorders"
 
 const SCALE = 0.5
 
-const Player = ({player, imgSize, mapPos, isBerek}) => {
+const Player = ({player, imgSize, mapPos, berek}) => {
     const playerPos = calculatePlayer(imgSize, player, mapPos)
-
     const playerStyle = {
         top: `${playerPos[0]}px`,
         left: `${playerPos[1]}px`,
-        backgroundColor: isBerek ? " #0059ff" : player.isBerek ? "red" : "green"
+        backgroundColor: berek ? " #0059ff" : player.berek ? "red" : "#FB8A38"
     };
     return (<span className="enemy" style={playerStyle}/>)
 }

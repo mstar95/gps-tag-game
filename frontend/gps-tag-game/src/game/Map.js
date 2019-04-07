@@ -22,14 +22,14 @@ const Map = ({holderSize, players, user}) => {
     };
 
     const userStyle = {
-        ['backgroundColor']: `${user.isBerek ? "red" : "#0059ff"}`
+        ['backgroundColor']: `${user.berek ? "red" : "#0059ff"}`
     };
     return (
         <>
             <img src={img} alt='map' style={mapStyle}/>
-            <Radar isBerek={user.isBerek}/>
+            <Radar berek={user.berek}/>
             <span className="player" style={userStyle}/>
-            {players.map((player, id) => <Player player={player} imgSize={imgSize} mapPos={userPoint} isBerek={user.isBerek} key={id}/>)}
+            {players.map((player, id) => <Player player={player} imgSize={imgSize} mapPos={userPoint} berek={user.berek} key={id}/>)}
         </>
     );
 }
@@ -37,14 +37,12 @@ const Map = ({holderSize, players, user}) => {
 export default Map;
 
 function calculateUserPoint(imgSize, holderSize, userPos) {
-    console.log(userPos)
     if (!imgSize.height || !imgSize.width) {
         return [0, 0]
     }
     const userRelativePos = [MapBorders.N - userPos.positionY, userPos.positionX - MapBorders.W]
     const imgScale = [imgSize.height / (MapBorders.N - MapBorders.S), imgSize.width / (MapBorders.E - MapBorders.W)]
     const userPoint = [(userRelativePos[0] * imgScale[0]) * SCALE + holderSize.height * 0.5, (userRelativePos[1] * imgScale[1]) * SCALE + holderSize.width * 0.5]
-    console.log(userPoint)
     return userPoint
 }
 

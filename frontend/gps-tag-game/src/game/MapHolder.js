@@ -15,7 +15,7 @@ const MapHolder = ({user, players}) => {
                 <Map holderSize={mapSize} user={user} players={players}/>
             </div>
             <div className="under-map">
-                <UnderMapComponent isBerek={user.isBerek}/>
+                <UnderMapComponent user={user} players={players}/>
             </div>
         </>);
 }
