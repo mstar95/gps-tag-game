@@ -30,7 +30,7 @@ const RoomsComponent = ({history, match}) => {
             </TableHead>
             <TableBody>
                 {rooms.map(row => (
-                    <TableRow key={row.id} onClick={() => history.push(`/game/${id}/${row.id}`)}>
+                    <TableRow key={row.id} onClick={() => push(history, id, row.id)}>
                         <TableCell component="th" scope="row">
                             {row.name}
                         </TableCell>
@@ -44,3 +44,16 @@ const RoomsComponent = ({history, match}) => {
 }
 
 export default withRouter(RoomsComponent);
+
+function push(history, id, roomId) {
+    fetch(`http://localhost:8080/rooms/${roomId}/players`, {
+        method: "POST",
+        headers: {'Accept': 'application/json, text/plain, */*', 'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            'positionX': 20.993555,
+            'positionY': 52.210667,
+            'id': id
+        })
+    })
+        .then(() => history.push(`/game/${id}/${roomId}`))
+}

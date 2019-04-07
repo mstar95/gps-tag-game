@@ -3,6 +3,7 @@ package com.wawcode.gpstaggame.rooms
 import com.wawcode.gpstaggame.rooms.domain.Player
 import com.wawcode.gpstaggame.rooms.domain.Room
 import com.wawcode.gpstaggame.rooms.domain.RoomsRepository
+import com.wawcode.gpstaggame.rooms.dto.PlayerRequest
 import com.wawcode.gpstaggame.rooms.dto.RoomRequest
 import com.wawcode.gpstaggame.users.domain.UsersRepository
 import io.github.benas.randombeans.api.EnhancedRandom
@@ -26,9 +27,9 @@ class RoomsEndpoint(val roomsRepository: RoomsRepository, val usersRepository: U
            roomRequest.hostId, roomRequest.hostName, roomRequest.capacity, roomRequest.players))
 
     @PostMapping("/{id}/players")
-    fun postRoomPlayer(@PathVariable id: String, @RequestBody player: Player): Mono<Room> {
+    fun postRoomPlayer(@PathVariable id: String, @RequestBody player: PlayerRequest): Mono<Room> {
         val room: Mono<Room> = roomsRepository.findById(id)
-        return room.map { it.copy( players =  it.players + player) }
+        return room.map { it.copy( players =  it.players + Player(player.positionX, player.positionY, it.players.isEmpty(), player.id)) }
                 .flatMap { roomsRepository.save(it) }
     }
 
