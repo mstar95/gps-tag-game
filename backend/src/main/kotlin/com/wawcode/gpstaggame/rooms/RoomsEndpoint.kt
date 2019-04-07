@@ -49,8 +49,8 @@ class RoomsEndpoint(val roomsRepository: RoomsRepository, val usersRepository: U
     fun reset() = roomsRepository.save(Room("xd", "123456", "marek95", 10, listOf(
                         Player(20.993555, 52.210667, false, "123456"),
                         Player(20.991341, 52.210973, false, "123457"),
-                        Player(20.992381, 52.211590, true, "123458"),
-                        Player(20.995555, 52.214667, false, "12345"))))
+                        Player(20.992381, 52.211590, false, "123458"),
+                        Player(20.995555, 52.214667, true, "12345"))))
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.ACCEPTED)

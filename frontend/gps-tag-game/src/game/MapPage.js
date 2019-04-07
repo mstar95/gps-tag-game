@@ -29,13 +29,12 @@ function setGpsInterval(setPlayers, setUser,  playerId, roomId) {
 function updatePlayers(players, setPlayers, setUser, playerId) {
     setPlayers(players.filter(player => player.id != playerId))
     let player = players.find(player => player.id == playerId)
-    player.berek = true
     setUser(player)
 }
 
 async function getGpsPos(callback) {
     const location = await gps()
-   // console.log(location)
+    console.log(location)
 
     callback(location)
 }
