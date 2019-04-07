@@ -22,7 +22,7 @@ class PlayerEventProcessor(val roomsRepository: RoomsRepository, val objectMappe
                 .map {
                     objectMapper.readValue<RoomWebsocketRequest>(it.payloadAsText)
                 }.flatMap { room ->
-                    roomsRepository.findById(room.id.let { it })
+                    roomsRepository.findById(room.id)
                             .doOnSuccess { println(it) }
                             .map { Room(it.name, it.hostId, it.capacity, it.players.updatePlayer(room), it.id) }
                             .flatMap { roomsRepository.save(it) }

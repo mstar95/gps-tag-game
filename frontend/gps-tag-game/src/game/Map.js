@@ -59,11 +59,6 @@ let memoize
 
 async function getGpsPos(setUserPos, callback) {
     const location = await gps()
-    if (memoize && memoize.height === location.height && memoize.width === location.width) {
-        return
-    }
-    memoize = location
-
     let normalized = normalize(location)
     callback(location)
     setUserPos(normalized)
@@ -74,5 +69,5 @@ const normalize = location => (
 )
 
 function toPLayer(location) {
-    return {positionX: location.lat, positionY: location.lng, id: "ba457bf6-a617-4975-89b5-0bac63b110bc", playerId:  "0b63eb02-b66e-45ee-a111-66f1cd511436"}
+    return {positionX: location.lat, positionY: location.lng, id: "6ac5f3db-0b61-48ca-982b-095edd3b29f2", playerId:  "12345"}
 }

@@ -22,7 +22,7 @@ class RoomsEndpoint(val roomsRepository: RoomsRepository) {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun postRoom(@RequestBody roomRequest: RoomRequest) = roomsRepository.save(Room(roomRequest.name,
-            UUID.fromString(roomRequest.hostId), roomRequest.capacity, roomRequest.players))
+           roomRequest.hostId, roomRequest.capacity, roomRequest.players))
 
     @PostMapping("/{id}/players")
     fun postRoomPlayer(@PathVariable id: String, @RequestBody player: Player): Mono<Room> {
@@ -42,6 +42,14 @@ class RoomsEndpoint(val roomsRepository: RoomsRepository) {
     fun loadTestData() =
         roomsRepository.saveAll(EnhancedRandom.randomListOf(6, Room::class.java, "id", "players").map { Room(it.name, it.hostId, it.capacity,
                 EnhancedRandom.randomListOf(10, Player::class.java, "id").map { Player(it.positionX, it.positionY, it.isBerek) }) })
+
+    @GetMapping("/reset")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun reset() = roomsRepository.save(Room("xd", "123456", 10, listOf(
+                        Player(20.993555, 52.210667, false, "123456"),
+                        Player(20.991341, 52.210973, false, "123457"),
+                        Player(20.992381, 52.211590, true, "123458"),
+                        Player(20.995555, 52.214667, false, "12345"))))
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.ACCEPTED)
