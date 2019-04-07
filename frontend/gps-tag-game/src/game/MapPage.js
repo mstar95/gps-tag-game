@@ -7,32 +7,35 @@ const MapPage = (props) => {
     const {id, roomId} = props.match.params
     const [user, setUser] = useState(null);
     const [players, setPlayers] = useState([]);
-    console.log(user)
+    //console.log(user)
 
     useEffect(() => {
         setGpsInterval(setPlayers, setUser, id, roomId)
     }, []);
 
 
-    return !user ? <div> Ladowanie Gry</div> : <MapHolder user={user} players={players}/>;
+    return !user ? <div> Ladowanie Gry</div> : <MapHolder user={user} players={players} roomId={roomId}
+                                                          catchCallback={(room) => updatePlayers(room.players, setPlayers, setUser, id)}/>;
 }
 
 export default MapPage;
 
 function setGpsInterval(setPlayers, setUser,  playerId, roomId) {
-    let client = getClient((rooms) => updateRoom(rooms, setPlayers,setUser, playerId))
+    let client = getClient((rooms) => updatePlayers(rooms, setPlayers,setUser, playerId))
 
     setInterval(() => getGpsPos((location) => client.sendLocation(toPLayer(location, roomId, playerId))), 1000)
 }
 
-function updateRoom(players, setPlayers, setUser, playerId) {
+function updatePlayers(players, setPlayers, setUser, playerId) {
     setPlayers(players.filter(player => player.id != playerId))
-    setUser(players.find(player => player.id == playerId))
+    let player = players.find(player => player.id == playerId)
+    player.berek = true
+    setUser(player)
 }
 
 async function getGpsPos(callback) {
     const location = await gps()
-    console.log(location)
+   // console.log(location)
 
     callback(location)
 }

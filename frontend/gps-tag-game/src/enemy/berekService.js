@@ -4,7 +4,7 @@ export function getBerekClient(onMessage) {
     if (clientWebSocket) {
         return {catchBerek}
     }
-    clientWebSocket = new WebSocket("ws://localhost:8080/position-update");
+    clientWebSocket = new WebSocket("ws://localhost:8080/chujxD");
     clientWebSocket.onopen = function () {
         console.log("berek.onopen", clientWebSocket);
         console.log("berek.readyState", "websocketstatus");

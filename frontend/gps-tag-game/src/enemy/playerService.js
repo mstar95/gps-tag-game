@@ -16,7 +16,7 @@ export function getClient(onMessage) {
         console.log("clientWebSocket.onerror", clientWebSocket, error);
     }
     clientWebSocket.onmessage = function (data) {
-        console.log("clientWebSocket.onmessage", clientWebSocket, data);
+      //  console.log("clientWebSocket.onmessage", clientWebSocket, data);
         onMessage(JSON.parse(data.data))
     }
 

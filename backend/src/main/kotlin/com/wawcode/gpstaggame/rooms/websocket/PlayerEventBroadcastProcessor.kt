@@ -30,11 +30,11 @@ class PlayerEventBroadcastProcessor(val roomsRepository: RoomsRepository, val ob
                 }.flatMap { berekRequest ->
                     roomsRepository.findById(berekRequest.roomId)
                             .doOnSuccess { println(it) }
-                            .map { Room(it.name, it.hostId, it.capacity, it.players.updatePlayer(berekRequest), it.id) }
+                            .map { Room(it.name, it.hostId, it.hostName, it.capacity, it.players.updatePlayer(berekRequest), it.id) }
                             .flatMap { roomsRepository.save(it) }
                 }
                 .subscribe(subscriber::onNext, subscriber::onError, subscriber::onComplete)
-        return webSocketSession.send(roomFlux.map { it.toString() }.map(webSocketSession::textMessage))
+        return webSocketSession.send(roomFlux.map { objectMapper.writeValueAsString(it) }.map(webSocketSession::textMessage))
     }
 }
 

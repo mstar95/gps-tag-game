@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react"
 import Map from "./Map"
 import UnderMapComponent from "./UnderMapComp"
 
-const MapHolder = ({user, players}) => {
+const MapHolder = ({user, players, roomId, catchCallback}) => {
     const [mapSize, setMapSize] = useState({height: 0, width: 0});
 
     const ref = useRef(null)
@@ -15,7 +15,7 @@ const MapHolder = ({user, players}) => {
                 <Map holderSize={mapSize} user={user} players={players}/>
             </div>
             <div className="under-map">
-                <UnderMapComponent user={user} players={players}/>
+                <UnderMapComponent user={user} players={players} roomId={roomId} catchCallback={catchCallback}/>
             </div>
         </>);
 }
